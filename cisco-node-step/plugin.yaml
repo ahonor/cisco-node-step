@@ -1,0 +1,49 @@
+name: Cisco Script Node Step
+rundeckPluginVersion: 1.0
+author: (C) Alex Honor
+date: 05/23/2016
+version: 1.0
+providers:
+    - name: cisco-node-step
+      service: WorkflowNodeStep
+      title: Run Cisco IOS Commands
+      description: Executes the IOS Commands. Commands can reference context variables.
+      plugin-type: script
+      script-interpreter: /bin/bash
+      script-file: exec.sh
+      script-args: ${node.username} ${node.hostname}
+      config:
+        - name: ios_script
+          title: IOS Commands
+          type: String
+          required: true
+          description: the IOS commands to execute
+          renderingOptions:
+            displayType: CODE
+        - name: ssh-key-storage-path
+          title: SSH Keyfile
+          type: String
+          required: false
+          description: "Storage path for ssh password."
+          renderingOptions:
+            groupng: secondary
+            groupName: SSH
+            selectionAccessor: "STORAGE_PATH"
+            valueConversion: "STORAGE_PATH_AUTOMATIC_READ"
+            storage-path-root: "keys"
+            instance-scope-node-attribute: "ssh-key-storage-path"
+        - name: ssh-options
+          title: SSH Options
+          type: String
+          required: false
+          description: "Extra ssh options"
+          default: "-tt -o StrictHostKeyChecking=no"
+          renderingOptions:
+            groupng: secondary
+            groupName: SSH
+        - name: dry-run
+          title: Dry run
+          type: Boolean
+          required: false
+          default: true
+          description: "Show commands to run without executing."
