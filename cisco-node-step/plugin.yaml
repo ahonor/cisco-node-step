@@ -2,7 +2,7 @@ name: Cisco Script Node Step
 rundeckPluginVersion: 1.0
 author: (C) Alex Honor
 date: 05/23/2016
-version: 1.0
+version: 1.1
 providers:
     - name: cisco-node-step
       service: WorkflowNodeStep
